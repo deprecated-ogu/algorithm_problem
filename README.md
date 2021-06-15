@@ -1,4 +1,4 @@
-# algorithm_solve repo
+# algorithm problem solving
 
 ## Algorithm
 ---
