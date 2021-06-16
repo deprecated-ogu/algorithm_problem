@@ -12,15 +12,19 @@
 const makeStr = ['rock', 'paper', 'scissors'];
 
 function recurse(result, temp, depth, n) {
-	if (depth === n) return [...result, temp];
+	if (depth === n) {
+    result.push(temp);
+    return ;
+  }
 
-	for (let i = 0; i < 3; i++) {
-		result = recurse(result, [...temp, makeStr[i]], depth + 1, n);
-	}
+	for (let i = 0; i < 3; i++)
+		recurse(result, [...temp, makeStr[i]], depth + 1, n);
+
 	return result;
 }
 
 function rockPaperScissors(n) {
+  n = n || 3
 	return recurse([], [], 0, n);
 }
 
