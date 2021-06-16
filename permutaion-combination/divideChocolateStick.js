@@ -26,28 +26,30 @@
 // [빼빼로를 받게 되는 직원의 수, 나누어 주는 아몬드 빼빼로의 수, 나누어 주는 누드 빼빼로의 수]
 // output은 output[i][0], 즉 '빼빼로를 받게 되는 직원의 수'를 기준으로 오름차순으로 정렬합니다.
 
-function divideChocolateStick(M, N) {
-	let result = [];
-	let i = 1;
-	let minValue = Math.min(M, N);
-	let maxValue = Math.max(M, N);
-	let divisor = [];
-
-	for (i; i * i < minValue; i++)
-		if (minValue % i === 0) {
-			divisor.push(i);
-			divisor.push(minValue / i);
-		}
-
-	if (i * i === minValue) divisor.push(i);
-	divisor.sort((a, b) => (a - b));
-	
-	for (let i = 0; i < divisor.length; i++)
-		if (maxValue % divisor[i] === 0) result.push([divisor[i], M / divisor[i], N / divisor[i]]);
-
-	return result;
+function GCD(m, n) {
+  if (m % n === 0) return n;
+  return GCD(n, m % n);
 }
 
+function divideChocolateStick(M, N) {
+	let result = [];
+	let div = [];
+	let gcd = GCD(M, N);
+
+	for (let i = 1; i * i < gcd; i++) { //
+		if (gcd % i === 0) {
+			div.push(i);
+			div.push(gcd / i);
+		}
+	}
+	if (Number.isInteger(Math.sqrt(gcd))) div.push(Math.sqrt(gcd));
+	div.sort((a, b) => (a - b));
+
+	for (let i = 0; i < div.length; i++)
+		result.push([div[i], M / div[i], N /div[i]]);
+	
+	return result;
+}
 
 let M = 8;
 let N = 10;
