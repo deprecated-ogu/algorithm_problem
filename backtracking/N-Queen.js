@@ -42,19 +42,18 @@ function checkQueen(board, x, y) {
 	return true;
 }
 
-function backtracking(board, n, step ,countQueen) {
-	if (countQueen === n) {
+function backtracking(board, n, step) {
+	if (step === n) {
+		// console.log(board);
 		count++;
 		return ;
 	}
 
-	
-	
 	for (let i = 0; i < n; i++) {
-		let [x, y] = getIndex(i + n * step, n);
+		let [x, y] = getIndex(i + (n * step), n);
 		if (checkQueen(board, x, y)) {
 			board[x][y] = 1;
-			backtracking(board, n, step + 1, countQueen + 1)
+			backtracking(board, n, step + 1);
 			board[x][y] = 0;
 		}
 	}
@@ -64,12 +63,12 @@ function solution(n) {
 	let board = [];
 	for (let i = 0; i < n; i++) board.push(new Array(n).fill(0));
 
-	backtracking(board, n, 0, 0);
+	backtracking(board, n, 0);
 	return count;
 }
 
 let start = new Date();
-console.log(solution(10));
+console.log(solution(6));
 let end = new Date();
 
 console.log(end - start);
