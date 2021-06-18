@@ -19,7 +19,7 @@ function getIndex(num, div) {
 	return [parseInt(num / div), num % div];
 }
 
-function checkDigonal(board, x, y) {
+function checkDiagonal(board, x, y) {
 	let sum = x + y;
 	let sub = x - y;
 	for (let i = 0; i < board.length; i++) {
@@ -38,7 +38,7 @@ function checkQueen(board, x, y) {
 		if (board[x][idx] === 1) return false;
 		if (board[idx][y] === 1) return false;
 	}
-	if (!checkDigonal(board, x, y)) return false;
+	if (!checkDiagonal(board, x, y)) return false;
 	return true;
 }
 
