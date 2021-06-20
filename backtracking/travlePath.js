@@ -12,6 +12,17 @@
 // 만일 가능한 경로가 2개 이상일 경우 알파벳 순서가 앞서는 경로를 return 합니다.
 // 모든 도시를 방문할 수 없는 경우는 주어지지 않습니다.
 
+/****** 풀이 *******
+1. 알파벳 순서가 앞서는 경로를 찾아야하므로 tickets 배열을 오름차순으로 정렬
+2. tickets, 방문 경로, 현재 위치, 방문해야하는 경로 수, 티켓 사용 여부를 넣어 재귀
+3. 다 방문했다면 `answer`에 방문 경로를 집어 넣으면서 함수를 종료
+4. 티켓에 대해 반복문을 돌리면서 갈 수 있는 다음 경로 탐색
+5. 티켓 사용 여부를 true로 업데이트 한 뒤 다음 경로에 대한 재귀
+6. 3~5번 과정 반복
+	6-1. 티켓을 사용하는 도중 다음 경로에 갈 수 없어 실패한다면 티켓 사용 여부를 다시 false로 초기화하면서 다시 다음 경로 티켓에 대해 탐색
+	6-2. 모든 티켓에 대해 실패한다면 상위 재귀함수로 돌아와 다른 값을 넣으면서 다시 시도
+7. 정답을 찾았을 경우 연쇄적으로 `return true`를 하게 되며 함수 종료
+*******************/
 'use strict';
 
 let answer = [];
@@ -19,15 +30,19 @@ let answer = [];
 function getPath(tickets, visitPath, currLocation, n, isUseTicket) {
 	if (visitPath.length === n) {
 		answer = visitPath;
-		return true;
+		return true; // 원하는 답을 찾았으니 함수 종료
 	}
 
+	// 티켓 탐색
 	for (let i = 0; i < tickets.length; i++) {
 		let nextLocation = tickets[i][1];
-		if (!isUseTicket[i] && tickets[i][0] === currLocation) {
-			isUseTicket[i] = true;
+		if (!isUseTicket[i] && tickets[i][0] === currLocation) { // 사용하지 않은 티켓들 중에 출발지가 현재 위치일 때
+			isUseTicket[i] = true; // 사용했다고 표시
+			// 정답을 찾았을 경우	: true
+			// 찾지 못 했을 경우	: false
+			// 정답을 찾았을 경우 if문이 성립이 되면서 연쇄적으로 true가 리턴되면서 모든 재귀 함수가 바로 종료
 			if (getPath(tickets, [...visitPath, nextLocation], nextLocation, n, isUseTicket)) return true;
-			isUseTicket[i] = false;
+			isUseTicket[i] = false; // 찾는데 실패하였으니 다시 원상 복구
 		}
 	}
 	return false;
@@ -36,7 +51,7 @@ function getPath(tickets, visitPath, currLocation, n, isUseTicket) {
 function solution(tickets) {
 	let visitPath = ["ICN"]
 	let isUseTicket = new Array(tickets.length).fill(false);
-	getPath(tickets.sort(), visitPath, "ICN", tickets.length + 1, isUseTicket);
+	getPath(tickets.sort(), visitPath, "ICN", tickets.length + 1, isUseTicket); // abc순으로 티켓을 사용해야하므로 sort();
 	return answer;
 }
 
