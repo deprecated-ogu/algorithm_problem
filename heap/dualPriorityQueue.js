@@ -28,8 +28,10 @@ function solution(operations) {
 	let operatorArr = operations.map(el => el.split(' ' ));
 	operatorArr.forEach(el => { el[1] = parseInt(el[1]); });
 	let arr = [];
+
 	while (operatorArr.length) operate(arr, operatorArr.shift());
 	arr.sort((a, b) => a - b);
+	
 	return arr.length ? [arr[arr.length - 1], arr[0]] : [0, 0];
 }
 
