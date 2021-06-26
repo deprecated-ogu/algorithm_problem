@@ -8,15 +8,14 @@ function solution(jobs) {
 	let idxJobs = jobs.map((el, idx) => ([...el, idx]));
 
 	while (idxJobs.length) {
-		let currentJob;
 		let enableJobs = idxJobs.filter(el => el[0] <= currentTime)
 		
 		if (enableJobs.length) {
 			enableJobs.sort((a, b) => a[1] - b[1]);
-			currentJob = enableJobs.shift();
-			idxJobs = idxJobs.filter(el => (currentJob[2] !== el[2]));
-			currentTime += currentJob[1];
-			latency += (currentTime - currentJob[0]);
+			let [start, time, idx] = enableJobs.shift();
+			idxJobs = idxJobs.filter(el => (idx !== el[2]));
+			currentTime += time;
+			latency += (currentTime - start);
 		}
 		else currentTime++;
 	}
