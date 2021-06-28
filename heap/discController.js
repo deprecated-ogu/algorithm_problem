@@ -4,23 +4,28 @@
 
 function solution(jobs) {
 	let currentTime = 0;
+	let N = jobs.length;
 	let latency = 0;
-	let idxJobs = jobs.map((el, idx) => ([...el, idx]));
-
-	while (idxJobs.length) {
-		let enableJobs = idxJobs.filter(el => el[0] <= currentTime)
+	let enableJobs = [];
+	
+	while (jobs.length || enableJobs.length) {
+		for (let i = 0; i < jobs.length; i++) {
+			if (jobs[i][0] <= currentTime) {
+				enableJobs.push(jobs.splice(i, 1)[0]);
+				i--;
+			}
+		}
 		
 		if (enableJobs.length) {
 			enableJobs.sort((a, b) => a[1] - b[1]);
-			let [start, time, idx] = enableJobs.shift();
-			idxJobs = idxJobs.filter(el => (idx !== el[2]));
+			let [startedAt, time] = enableJobs.shift();
 			currentTime += time;
-			latency += (currentTime - start);
+			latency += (currentTime - startedAt);
 		}
 		else currentTime++;
 	}
 
-	return parseInt(latency / jobs.length);
+	return parseInt(latency / N);
 }
 
 var jobs = [[0, 3], [1, 9], [2, 6]];
