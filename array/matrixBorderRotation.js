@@ -13,9 +13,9 @@
 function getMatrix(rows, columns) {
 	let matrix = [];
 	var value = 1;
-	for (let i = 0; i < columns; i++) {
+	for (let i = 0; i < rows; i++) {
 		let tmpArr = [];
-		for (let j = 0; j < rows; j++) {
+		for (let j = 0; j < columns; j++) {
 			tmpArr.push(value);
 			value++;
 		}
@@ -28,23 +28,15 @@ function getIdx(startRow, startColumn, endRow, endColumn) {
 	let idxArr = [];
 	let row = startRow;
 	let col = startColumn;
-	for (col; col < endColumn; col++) {
-		idxArr.push([row - 1, col - 1]);
-	}
-	for (row; row < endRow; row++) {
-		idxArr.push([row - 1, col - 1]);
-	}
-	for (col; col > startColumn; col--) {
-		idxArr.push([row - 1, col - 1]);
-	}
-	for (row; row > startRow; row--) {
-		idxArr.push([row - 1, col - 1]);
-	}
+	for (col; col < endColumn; col++) idxArr.push([row - 1, col - 1]);
+	for (row; row < endRow; row++) idxArr.push([row - 1, col - 1]);
+	for (col; col > startColumn; col--) idxArr.push([row - 1, col - 1]);
+	for (row; row > startRow; row--) idxArr.push([row - 1, col - 1]);
 	
 	return idxArr
 }
 
-function rotatePartMatrix(matrix, rows, columns, startRow, startColumn, endRow, endColumn) {
+function rotatePartMatrix(matrix, startRow, startColumn, endRow, endColumn) {
 	let idxArr = getIdx(startRow, startColumn, endRow, endColumn);
 	idxArr.reverse();
 	let tmp = matrix[idxArr[0][0]][idxArr[0][1]];
@@ -68,12 +60,11 @@ function solution(rows, columns, queries) {
 
 	for (let i = 0; i < queries.length; i++) {
 		let query = queries[i];
-		result.push(rotatePartMatrix(matrix, rows, columns, query[0], query[1], query[2], query[3]));
+		result.push(rotatePartMatrix(matrix, query[0], query[1], query[2], query[3]));
 	}
 
 	return result;
 }
 
-// 100, 97, [[1, 1, 100, 97]]
 // console.log(solution(6, 6, [[2,2,5,4],[3,3,6,6],[5,1,6,3]]));
 console.log(solution(100, 97, [[1, 1, 100, 97]]));
