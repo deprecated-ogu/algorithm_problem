@@ -14,29 +14,29 @@
 // number 타입을 리턴해야 합니다.
 
 
-function calculateDistance(p1, p2) {
-  const yDiffSquared = Math.pow(p2[0] - p1[0], 2);
-  const xDiffSquared = Math.pow(p2[1] - p1[1], 2);
-  const dist = Math.sqrt(yDiffSquared + xDiffSquared);
-  return Math.round(dist * 100);
+function getDistance(p1, p2) {
+  const y = Math.pow(p2[0] - p1[0], 2);
+  const x = Math.pow(p2[1] - p1[1], 2);
+  const distance = Math.sqrt(y + x);
+  return Math.round(distance * 100);
 }
 
 const TSP = function (places) {
-  let currentMinDist = Number.MAX_VALUE;
+  let minDistance = Number.MAX_VALUE;
   const LENGTH = places.length;
   function traverse(lastVisited, visited, totalDist, visitNum) {
     if (visitNum === LENGTH) {
-      if (currentMinDist > totalDist) {
-        currentMinDist = totalDist;
+      if (minDistance > totalDist) {
+        minDistance = totalDist;
       }
       return;
     }
 
     visited.forEach((value, idx) => {
       if (value === false) {
-        const distToNext = calculateDistance(places[lastVisited], places[idx]);
+        const next = getDistance(places[lastVisited], places[idx]);
         visited[idx] = true;
-        traverse(idx, visited, totalDist + distToNext, visitNum + 1);
+        traverse(idx, visited, totalDist + next, visitNum + 1);
         visited[idx] = false;
       }
     });
@@ -49,5 +49,5 @@ const TSP = function (places) {
     visited[idx] = false;
   });
 
-  return currentMinDist;
+  return minDistance;
 };
