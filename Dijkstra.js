@@ -1,3 +1,25 @@
+// 문제
+// 무방향 그래프의 한 정점(vertex)에서 다른 정점까지의 최단 거리를 리턴해야 합니다.
+
+// 입력
+// 인자 1: num
+// number 타입의 자연수
+// 그래프에 존재하는 정점의 개수
+// 정점은 1부터 num까지 존재
+// 인자 2: edges
+// 배열(간선에 대한 정보)을 요소로 갖는 배열
+// edges[i]는 number 타입을 요소로 갖는 배열
+// edges[i].length는 3
+// edges[i]의 요소는 차례대로 정점, 정점, 거리
+// edges[i][2]은 100 이하의 양의 정수
+// [1, 2, 3]은 1번 정점과 2번 정점 사이의 거리가 양방향 모두 3임을 의미함
+// 인자 3: start
+// number 타입의 출발 정점
+// 인자 4: end
+// number 타입의 도착 정점
+// 출력
+// number 타입을 리턴해야 합니다.
+
 function createGraphByList(num, edges) {
   const _edges = {};
   for (let i = 1; i <= num; i++) _edges[i] = [];
