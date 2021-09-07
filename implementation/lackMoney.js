@@ -1,3 +1,5 @@
+// https://programmers.co.kr/learn/courses/30/lessons/82612
+
 function solution(price, money, count) {
   let total = 0;
 
@@ -5,5 +7,5 @@ function solution(price, money, count) {
     total += price * i;
   }
 
-  return total - money;
+  return total > money ? total - money : 0;
 }
