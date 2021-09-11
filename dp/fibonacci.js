@@ -13,13 +13,23 @@
 // 반복문(for, while) 사용은 금지됩니다.
 // 함수 fibonacci가 반드시 재귀함수일 필요는 없습니다.
 
-const memory = [];
+// https://programmers.co.kr/learn/courses/30/lessons/12945
 
+const memory = [];
 function fibonacci(n) {
   if (n < 2) return n;
   if (memory[n]) return memory[n];
-  return memory[n] = fibonacci(n - 1) + fibonacci(n - 2);
+  return (memory[n] = fibonacci(n - 1) + fibonacci(n - 2));
 }
+
+// let data = [0, 1];
+// function solution(n) {
+//     if (n < 2) return data[n];
+//     for (let i = 2; i <= n; i++)
+//         data.push((data[i - 1] + data[i - 2]) % 1234567);
+
+//     return data[n];
+// }
 
 let output = fibonacci(0);
 console.log(output); // --> 0
