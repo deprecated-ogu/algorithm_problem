@@ -1,7 +1,4 @@
-# algorithm problem solving
-
 ## Algorithm
----
 - [Sort](https://velog.io/@idhyo0o/Algorithm-Sort)
 - [Binary Search](https://velog.io/@idhyo0o/Algorithm-Binary-Search)
 - [Permutaion / Combination](https://velog.io/@idhyo0o/Algorithm-Permutaion-Combination)
