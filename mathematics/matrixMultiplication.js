@@ -1,3 +1,5 @@
+// https://programmers.co.kr/learn/courses/30/lessons/12949
+
 function getMultipleMatrix(arr1, arr2, i, j) {
   let result = 0;
   for (let x = 0; x < arr1[i].length; x++) {

@@ -1,3 +1,5 @@
+// https://programmers.co.kr/learn/courses/30/lessons/12953
+
 function GCD(m, n) {
   if (m % n == 0) return n;
   return GCD(n, m % n);
