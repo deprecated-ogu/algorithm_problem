@@ -4,13 +4,9 @@ function solution(record) {
   let idToName = {};
   let recordArr = record.map((el) => el.split(" "));
   let resultMsg = [];
-  console.log(recordArr);
 
   recordArr.forEach((el) => {
-    if (el[0] === "Enter") {
-      idToName[el[1]] = el[2];
-    }
-    if (el[0] === "Change") {
+    if (el[0] === "Enter" || el[0] === "Change") {
       idToName[el[1]] = el[2];
     }
   });
