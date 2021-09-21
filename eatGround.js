@@ -1,26 +1,14 @@
 // https://programmers.co.kr/learn/courses/30/lessons/12913
 
-function getMax(arr, prevIdx) {
-  let max = 0;
-  arr.forEach((val, idx) => {
-    if (prevIdx !== idx && val > max) {
-      max = Math.max(max, val);
-    }
-  });
-  console.log(arr.indexOf(max));
-  return [max, arr.indexOf(max)];
-}
-
 function solution(land) {
-  let result = 0;
-  let prevIdx = -1;
-  let max;
+  for (let i = 1; i < land.length; i++) {
+    land[i][0] += Math.max(land[i - 1][1], land[i - 1][2], land[i - 1][3]);
+    land[i][1] += Math.max(land[i - 1][0], land[i - 1][2], land[i - 1][3]);
+    land[i][2] += Math.max(land[i - 1][0], land[i - 1][1], land[i - 1][3]);
+    land[i][3] += Math.max(land[i - 1][0], land[i - 1][1], land[i - 1][2]);
+  }
 
-  land.forEach((arr, row) => {
-    [max, prevIdx] = getMax(arr, prevIdx);
-    result += max;
-  });
-  return result;
+  return Math.max(...land[land.length - 1]);
 }
 
 var land = [
@@ -28,6 +16,5 @@ var land = [
   [5, 6, 7, 100],
   [4, 3, 2, 1],
 ];
-console.log(solution(land));
 
-// 그리디하게 풀면 안됨 ㅎ
+console.log(solution(land));
