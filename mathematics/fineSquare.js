@@ -6,8 +6,7 @@ function GCD(m, n) {
 }
 
 function solution(w, h) {
-  const gcd = GCD(w, h);
-  return w * h - (w / gcd + h / gcd - 1) * gcd;
+  return w * h - (w + h - GCD(w, h));
 }
 
 var w = 8;
